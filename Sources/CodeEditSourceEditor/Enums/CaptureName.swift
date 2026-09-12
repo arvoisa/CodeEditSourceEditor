@@ -33,6 +33,10 @@ public enum CaptureName: Int8, CaseIterable, Sendable {
     case variableBuiltin
     case keywordReturn
     case keywordFunction
+    case constant
+    case `operator`
+    case punctuation
+    case attribute
 
     var alternate: CaptureName {
         switch self {
@@ -92,7 +96,22 @@ public enum CaptureName: Int8, CaseIterable, Sendable {
             return .keywordReturn
         case "keyword.function":
             return .keywordFunction
+        case "constant":
+            return .constant
+        case "operator":
+            return .operator
+        case "punctuation":
+            return .punctuation
+        case "attribute":
+            return .attribute
         default:
+            // Queries specialise with dots — `function.call`, `constant.builtin`,
+            // `punctuation.bracket`, `string.special`, `type.builtin` — and an
+            // exact match drops every one of them to plain text. Fall back to
+            // the head of the name.
+            if let dot = string.firstIndex(of: ".") {
+                return fromString(String(string[..<dot]))
+            }
             return nil
         }
     }
@@ -142,6 +161,14 @@ public enum CaptureName: Int8, CaseIterable, Sendable {
             return "keywordReturn"
         case .keywordFunction:
             return "keywordFunction"
+        case .constant:
+            return "constant"
+        case .operator:
+            return "operator"
+        case .punctuation:
+            return "punctuation"
+        case .attribute:
+            return "attribute"
         }
     }
 }

@@ -41,6 +41,13 @@ public struct EditorTheme: Equatable {
     public var strings: Attribute
     public var characters: Attribute
     public var comments: Attribute
+    /// Four slots the original theme folds into others: functions drew as
+    /// variables, constants as values, operators and punctuation as text. Nil
+    /// keeps that fold, so a theme written for the original still renders.
+    public var functions: Attribute?
+    public var constants: Attribute?
+    public var operators: Attribute?
+    public var punctuation: Attribute?
 
     public init(
         text: Attribute,
@@ -58,7 +65,11 @@ public struct EditorTheme: Equatable {
         numbers: Attribute,
         strings: Attribute,
         characters: Attribute,
-        comments: Attribute
+        comments: Attribute,
+        functions: Attribute? = nil,
+        constants: Attribute? = nil,
+        operators: Attribute? = nil,
+        punctuation: Attribute? = nil
     ) {
         self.text = text
         self.insertionPoint = insertionPoint
@@ -76,6 +87,10 @@ public struct EditorTheme: Equatable {
         self.strings = strings
         self.characters = characters
         self.comments = comments
+        self.functions = functions
+        self.constants = constants
+        self.operators = operators
+        self.punctuation = punctuation
     }
 
     /// Maps a capture type to the attributes for that capture determined by the theme.
@@ -88,7 +103,11 @@ public struct EditorTheme: Equatable {
             return keywords
         case .comment: return comments
         case .variable, .property: return variables
-        case .function, .method: return variables
+        case .function, .method: return functions ?? variables
+        case .constant: return constants ?? values
+        case .operator: return operators ?? text
+        case .punctuation: return punctuation ?? text
+        case .attribute: return attributes
         case .number, .float: return numbers
         case .string: return strings
         case .type: return types
