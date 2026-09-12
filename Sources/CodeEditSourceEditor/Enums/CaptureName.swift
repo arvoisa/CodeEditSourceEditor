@@ -37,6 +37,12 @@ public enum CaptureName: Int8, CaseIterable, Sendable {
     case `operator`
     case punctuation
     case attribute
+    // Prose captures, from the markdown grammars.
+    case textTitle
+    case textStrong
+    case textEmphasis
+    case textLiteral
+    case textUri
 
     var alternate: CaptureName {
         switch self {
@@ -104,6 +110,16 @@ public enum CaptureName: Int8, CaseIterable, Sendable {
             return .punctuation
         case "attribute":
             return .attribute
+        case "text.title":
+            return .textTitle
+        case "text.strong":
+            return .textStrong
+        case "text.emphasis":
+            return .textEmphasis
+        case "text.literal":
+            return .textLiteral
+        case "text.uri", "text.reference":
+            return .textUri
         default:
             // Queries specialise with dots — `function.call`, `constant.builtin`,
             // `punctuation.bracket`, `string.special`, `type.builtin` — and an
@@ -169,6 +185,16 @@ public enum CaptureName: Int8, CaseIterable, Sendable {
             return "punctuation"
         case .attribute:
             return "attribute"
+        case .textTitle:
+            return "textTitle"
+        case .textStrong:
+            return "textStrong"
+        case .textEmphasis:
+            return "textEmphasis"
+        case .textLiteral:
+            return "textLiteral"
+        case .textUri:
+            return "textUri"
         }
     }
 }

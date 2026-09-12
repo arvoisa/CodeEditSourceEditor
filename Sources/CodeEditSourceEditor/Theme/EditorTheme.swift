@@ -108,6 +108,14 @@ public struct EditorTheme: Equatable {
         case .operator: return operators ?? text
         case .punctuation: return punctuation ?? text
         case .attribute: return attributes
+        // Prose: a heading is a keyword-coloured bold line, code is a string,
+        // a link is a function, and strong and emphasis are the text itself
+        // with the trait — what every markdown highlighter converges on.
+        case .textTitle: return Attribute(color: keywords.color, bold: true)
+        case .textStrong: return Attribute(color: text.color, bold: true)
+        case .textEmphasis: return Attribute(color: text.color, italic: true)
+        case .textLiteral: return strings
+        case .textUri: return Attribute(color: (functions ?? variables).color)
         case .number, .float: return numbers
         case .string: return strings
         case .type: return types
