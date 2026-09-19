@@ -317,8 +317,12 @@ extension SuggestionViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
 
     public func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+        // The window is already painted in the theme's background, so a
+        // selection drawn in it was invisible in dark mode — arrowing through
+        // the list changed nothing on screen. The text selection colour is the one
+        // theme colour meant to sit on the background and still read.
         CodeSuggestionRowView { [weak self] in
-            self?.model?.activeTextView?.theme.background ?? NSColor.controlBackgroundColor
+            self?.model?.activeTextView?.theme.selection ?? NSColor.selectedContentBackgroundColor
         }
     }
 
