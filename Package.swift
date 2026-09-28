@@ -14,10 +14,12 @@ let package = Package(
         )
     ],
     dependencies: [
-        // A fast, efficient, text view for code.
+        // A fast, efficient, text view for code. Nomon's fork: 0.12.1 plus the
+        // unmerged upstream fixes #122 (wrap duplication), #123 (Cmd+A last
+        // line) and #126 (drag over the gutter). Pinned by revision.
         .package(
-            url: "https://github.com/CodeEditApp/CodeEditTextView.git",
-            from: "0.12.1"
+            url: "https://github.com/arvoisa/CodeEditTextView.git",
+            revision: "80a89b29b5c92e5b5cf2c13f3298bfd6d26de0c6"
         ),
         // tree-sitter languages
         .package(

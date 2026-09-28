@@ -21,10 +21,9 @@
     {
       "identity" : "codeedittextview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/CodeEditTextView.git",
+      "location" : "https://github.com/arvoisa/CodeEditTextView.git",
       "state" : {
-        "revision" : "d7ac3f11f22ec2e820187acce8f3a3fb7aa8ddec",
-        "version" : "0.12.1"
+        "revision" : "80a89b29b5c92e5b5cf2c13f3298bfd6d26de0c6"
       }
     },
     {
