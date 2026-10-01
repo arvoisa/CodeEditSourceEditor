@@ -19,7 +19,7 @@ let package = Package(
         // line) and #126 (drag over the gutter). Pinned by revision.
         .package(
             url: "https://github.com/arvoisa/CodeEditTextView.git",
-            revision: "80a89b29b5c92e5b5cf2c13f3298bfd6d26de0c6"
+            revision: "623069c1dcecd28487d08cfea1f9cabfe363c2b1"
         ),
         // tree-sitter languages
         .package(
